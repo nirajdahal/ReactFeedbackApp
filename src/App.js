@@ -1,25 +1,49 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 function App() {
+
+
+  const comments = [
+    {
+      id: 1,
+      text: "First Comment"
+    },
+    {
+      id: 2,
+      text: "Second Comment"
+    },
+    {
+      id: 3,
+      text: "Third Comment"
+    }
+  ]
+
+  const isLoading = false;
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div >
+
+      {
+        isLoading &&
+        <ul>
+          {comments.map((comment, index) => (
+            <li key={index}>{comment.id}</li>
+          )
+          )}
+        </ul>
+
+      }
+
+      {
+        comments[0].id
+      }
     </div>
+
   );
+
 }
 
 export default App;
