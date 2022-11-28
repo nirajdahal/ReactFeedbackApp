@@ -1,46 +1,33 @@
+import { useState } from 'react';
+import { FeedbackData } from './data/FeedbackData';
 
+import Header from './components/Header'
 import './App.css';
+import FeedbackList from './components/FeedbackList';
+import FeedbackStats from './components/FeedbackStats';
+
 
 function App() {
+  const [feedback, setFeedback] = useState(FeedbackData)
 
-
-  const comments = [
-    {
-      id: 1,
-      text: "First Comment"
-    },
-    {
-      id: 2,
-      text: "Second Comment"
-    },
-    {
-      id: 3,
-      text: "Third Comment"
+  const deleteFeedback = (id) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      setFeedback(feedback.filter((item) => {
+        return item.id !== id
+      }))
     }
-  ]
-
-  const isLoading = false;
-
+  }
 
   return (
+    <>
+      <Header />
 
-    <div >
+      <div className='container'>
+        <FeedbackStats feedback={feedback} />        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
 
-      {
-        isLoading &&
-        <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>{comment.id}</li>
-          )
-          )}
-        </ul>
+      </div>
 
-      }
-
-      {
-        comments[0].id
-      }
-    </div>
+    </>
 
   );
 
