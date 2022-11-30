@@ -1,28 +1,55 @@
 
 import FeedbackItem from './FeedbackItem'
 import PropTypes from 'prop-types'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function FeedbackList({ feedback, handleDelete }) {
     if (!feedback || feedback.length === 0) {
         return <h3 style={{ marginTop: '20px' }}>No Feedback </h3>
     }
     return (
+
         <div className="feedback-list" >
-
-            {feedback.map((item) => (
-                <div key={item.id}>
-                    <FeedbackItem
+            <AnimatePresence>
+                {feedback.map((item) => (
+                    <motion.div
                         key={item.id}
-                        item={item}
-                        handleDelete={handleDelete}
-                    />
-                </div>
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
 
-            ))}
+                    >
+                        <FeedbackItem
+                            key={item.id}
+                            item={item}
+                            handleDelete={handleDelete}
+                        />
+                    </motion.div>
+
+                ))}
+            </AnimatePresence>
         </div >
 
 
     )
+
+    // return (
+    //     <div className="feedback-list" >
+
+    //         {feedback.map((item) => (
+    //             <div key={item.id}>
+    //                 <FeedbackItem
+    //                     key={item.id}
+    //                     item={item}
+    //                     handleDelete={handleDelete}
+    //                 />
+    //             </div>
+
+    //         ))}
+    //     </div >
+
+
+    // )
 }
 
 FeedbackList.prototype = {
