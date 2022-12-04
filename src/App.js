@@ -1,55 +1,38 @@
-import { useState } from 'react';
-import { FeedbackData } from './data/FeedbackData';
-
 import Header from './components/Header'
 import './App.css';
 import FeedbackList from './components/FeedbackList';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
-import { v4 as uuidv4 } from 'uuid'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import AboutIconLink from './components/AboutIconLink';
+import { FeedbackProvider } from './context/FeedbackContext';
 
 function App() {
-  const [feedback, setFeedback] = useState(FeedbackData)
-
-  const deleteFeedback = (id) => {
-    if (window.confirm("Are you sure you want to delete?")) {
-      setFeedback(feedback.filter((item) => {
-        return item.id !== id
-      }))
-    }
-  }
-
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = uuidv4();
-    setFeedback([newFeedback, ...feedback])
-
-  }
 
   return (
     <>
-      <Router>
+      <FeedbackProvider>
+        <Router>
 
-        <Header />
-        <Routes>
-          <Route exact path='/' element={<>
+          <Header />
+          <Routes>
+            <Route exact path='/' element={<>
 
-            <div className='container'>
-              <FeedbackForm handleAdd={addFeedback} />
-              <FeedbackStats feedback={feedback} />
-              <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
-            </div>
-          </>}>
+              <div className='container'>
+                <FeedbackForm />
+                <FeedbackStats />
+                <FeedbackList />
+              </div>
+            </>}>
 
-          </Route>
-          <Route path='/about' element={<AboutPage />}></Route>
+            </Route>
+            <Route path='/about' element={<AboutPage />}></Route>
 
-        </Routes>
-        <AboutIconLink />
-      </Router>
-
+          </Routes>
+          <AboutIconLink />
+        </Router>
+      </FeedbackProvider>
     </>
 
   );

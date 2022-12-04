@@ -1,11 +1,14 @@
 import React from 'react'
+import FeedbackContext from '../context/FeedbackContext'
+import { useContext } from 'react'
 
-function FeedbackStats({ feedback }) {
+function FeedbackStats() {
+    const { feedback } = useContext(FeedbackContext)
     const calculateAverageRating = () => {
         let average = feedback.reduce((acc, curr) => {
             return acc + curr.rating
         }, 0) / feedback.length
-        return average
+        return average.toFixed(1)
     }
     return (
         <div className='feedback.stats'>

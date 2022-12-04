@@ -1,7 +1,7 @@
 export const FeedbackData = [
     {
         id: 1,
-        rating: 10,
+        rating: 5,
         text: 'I want to leave this feedback just for fun',
     },
     {
