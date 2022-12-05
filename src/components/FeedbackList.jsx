@@ -1,7 +1,7 @@
 
 import FeedbackItem from './FeedbackItem'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import FeedbackContext from '../context/FeedbackContext';
 
 
@@ -11,8 +11,10 @@ function FeedbackList() {
 
 
 
+
+
     if (!feedback || feedback.length === 0) {
-        console.log("feedback", feedback)
+
         return <h3 style={{ marginTop: '20px' }}>No Feedback </h3>
     }
     return (

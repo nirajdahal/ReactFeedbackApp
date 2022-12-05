@@ -1,4 +1,4 @@
-export const FeedbackData = [
+export let FeedbackData = [
     {
         id: 1,
         rating: 5,
